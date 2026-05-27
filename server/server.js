@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
+const jobRoutes = require("./routes/jobRoutes");
 require("dotenv").config();
 
 const app = express();
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/jobs", jobRoutes);
 // Test route
 app.get("/", (req, res) => {
   res.send("Backend server is running successfully");

@@ -1,8 +1,8 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const User = require("../model/User");
-
+const User = require("../models/User");
+const protect = require("../middleware/authMiddleware");
 const router = express.Router();
 
 // Register API
@@ -99,5 +99,12 @@ router.post("/login", async (req, res) => {
       error: error.message,
     });
   }
+});
+// Profile API - Protected Route
+router.get("/profile", protect, async (req, res) => {
+  res.status(200).json({
+    message: "Profile fetched successfully",
+    user: req.user,
+  });
 });
 module.exports = router;
